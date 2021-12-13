@@ -9,20 +9,44 @@ class RadioButtonElement extends StatefulWidget{
 
 }
 
+enum States {first, second}
 
 class _RadioButtonElement extends State<RadioButtonElement>{
   late int _changedValue;
+  States _states = States.first;
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text('Radio button'),
-      leading: Radio(
-      value: 1,
-      activeColor: Color(0xFF6200EE), 
-        onChanged: (int? value) { _changedValue = value }, groupValue: null,
+    return Column(
+      children: [
+        ListTile(
+          title: const Text('Radio button'),
+          leading: Radio<States>(
+              value: States.first,
+              groupValue: _states,
+              onChanged: (States? value){
+                setState((){
+                  _states = value!;
+                });
+              }
+          ),
+        ),
+        ListTile(
+          title: const Text('Radio button'),
+          leading: Radio<States>(
+              value: States.second,
+              groupValue: _states,
+              onChanged: (States? value){
+                setState((){
+                  _states = value!;
+                });
+              }
+          ),
+        )
+      ],
 
-    ),
     );
+
+
   }
 
 }
