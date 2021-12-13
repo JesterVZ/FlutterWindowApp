@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:information_project/radio_button.dart';
 
 class FullPage extends StatelessWidget{
   const FullPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +17,7 @@ class FullPage extends StatelessWidget{
               Text("Text")
             ],
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -28,9 +29,21 @@ class FullPage extends StatelessWidget{
           ),
           Column(
             children: [
-              
+              const Text("Text"),
+              Text("Text",
+                  style: Theme.of(context).textTheme.bodyText1),
+              const TextField(
+                obscureText: false,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Text',
+                ),
+              )
+
             ],
-          )
+
+          ),
+          const RadioButtonElement()
         ],
       ),)
 
