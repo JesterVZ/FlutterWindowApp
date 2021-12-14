@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:information_project/dialog_box.dart';
 import 'package:information_project/radio_button.dart';
 
+import 'check_box.dart';
+import 'information.dart';
+
 class FullPage extends StatelessWidget{
-  const FullPage({Key? key}) : super(key: key);
+  FullPage(this.info);
+  final textController = TextEditingController();
+  final Info info;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,18 +20,23 @@ class FullPage extends StatelessWidget{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Text("Text"),
-              Text("Text")
+              Text("Название"),
+              Text("Код")
             ],
           ),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Text",
-                  style: Theme.of(context).textTheme.bodyText1),
-              Text("Text",
-                  style: Theme.of(context).textTheme.bodyText1)
+              Flexible(
+                child: Text(info.name,
+                    style: Theme.of(context).textTheme.bodyText1),
+              ),
+              Flexible(
+                child: Text(info.code.toString(),
+                    style: Theme.of(context).textTheme.bodyText1),
+              )
+              
             ],
           ),
           Column(
@@ -33,9 +44,10 @@ class FullPage extends StatelessWidget{
               const Text("Text"),
               Text("Text",
                   style: Theme.of(context).textTheme.bodyText1),
-              const TextField(
+              TextField(
+                controller: textController,
                 obscureText: false,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Text',
                 ),
@@ -44,7 +56,17 @@ class FullPage extends StatelessWidget{
             ],
 
           ),
-          const RadioButtonElement()
+          const RadioButtonElement(),
+          const CheckboxElement(),
+          ElevatedButton(
+              onPressed: () {
+                showDialog(context: context,
+                builder: (BuildContext context){
+                  return DialogBox(title: 'Информация', descriptions: textController.text, text: info.name + ' ' + info.code.toString());
+                });
+              },
+              child: const Text('Show info')
+          )
         ],
       ),)
 
